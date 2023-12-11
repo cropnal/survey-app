@@ -1,1 +1,12 @@
-Seller Name,Vegetable Name,Vegetable Purchase Value per KG,Kg Purchase,Transport Cost,Spoilage Losses,Selling Price,Purchase Location,Happiness Index,Phone Number,Lower Price Preference,Income Insecurity,Kg Sold per Day
+Seller Name,Age,Vegetable Name,Vegetable Purchase Value per KG,Kg Purchase,Transport Cost,Spoilage Losses,Selling Price,Purchase Location,Happiness Index,Phone Number,Lower Price Preference,Income Insecurity,Kg Sold per Day
+John Doe,32,Tomato,34.0,15.0,40.0,5.0,20.0,Local Market,Yes,9876543210,False,Yes,150
+Jane Smith,28,Cucumber,3.5,12.0,30.0,8.0,18.0,Wholesale Market,Yes,8765432109,True,No,120
+Michael Johnson,35,Carrot,30.0,8.0,25.0,6.0,30.0,Local Market,Yes,7654321098,False,Yes,80
+Emily Davis,40,Potato,2.5,20.0,45.0,12.0,15.0,Local Market,No,6543210987,True,No,200
+William Brown,28,Bell Pepper,5.0,10.0,35.0,7.0,25.0,Wholesale Market,Yes,5432109876,False,Yes,100
+Olivia Wilson,45,Tomato,4.5,18.0,40.0,9.0,22.0,Local Market,Yes,4321098765,True,Yes,120
+Daniel Lee,38,Cucumber,3.0,14.0,30.0,6.0,20.0,Local Market,Yes,3210987654,False,Yes,140
+Sophia Martinez,33,Bell Pepper,5.5,12.0,32.0,8.0,28.0,Wholesale Market,No,2109876543,True,No,110
+Matthew Anderson,42,Potato,2.0,25.0,50.0,15.0,18.0,Local Market,Yes,1098765432,True,Yes,250
+Emma Taylor,29,Carrot,6.5,10.0,22.0,5.0,35.0,Local Market,Yes,9876543210,True,Yes,90
+
