@@ -1,1 +1,12 @@
 Farmer Name,Village,Mobile,Crop Name,Crop Duration (months),Crop Area in Bigha,Seeds,Fertilizer Cost,Which Fertilizer,Pesticide Cost,Water Supply Options,Water Supply System,Cost of Water System,Labour Cost,Crop Yield in KG,Selling Market,Market Price,Weather Issue,Government Compensation,Crop Insurance,Storage Challenges,Happy with Income,Farming Job Satisfaction,Inspire Other Farmers,Miscellaneous Cost,Extra Description
+Jane Smith,Greenfield Village,9876543210,Wheat,5,4.5,1200,5500,DAP,1200,Canal Water,Flood Irrigation,2500,3500,4800,Regional Co-op,9,Frost,False,True,False,Yes,Yes,Yes,600,No significant issues
+Robert Johnson,Sunnydale,8765432109,Maize,4,6.0,800,4000,Urea,800,Borewell,Drip Irrigation,1800,3000,4000,Local Market,8,Heavy Rain,True,False,False,Yes,No,Yes,450,Overall satisfied with results
+Maria Garcia,Harvest Hills,7654321098,Soybeans,5,7.5,1500,6000,Organic,1500,Rainfed,None,0,3800,5500,Farmer's Market,12,Pest Infestation,False,True,False,Yes,No,Yes,700,Emphasizes sustainable farming
+Michael Brown,Sunrise Acres,6543210987,Cotton,7,10.0,2000,7500,Nitrogen,1500,Tube Well,Sprinkler System,3000,4500,7000,Textile Industry,15,Crop Disease,False,True,True,Yes,No,Yes,800,Challenges in marketing
+William Davis,Meadowview,5432109876,Barley,4,3.5,900,4800,Phosphorus,1000,Canal Water,Flood Irrigation,2200,3200,4200,Local Brewery,11,Weed Infestation,True,False,False,Yes,Yes,Yes,500,Optimistic despite challenges
+Eva Wilson,Sunflower Springs,4321098765,Sugarcane,8,12.0,2500,8500,Potash,1200,Borewell,Drip Irrigation,2500,4000,6000,Sugar Mill,18,Flood,True,True,False,Yes,Yes,Yes,900,Invested in new equipment
+Daniel Miller,Growing Grove,3210987654,Peanuts,6,6.5,1100,5200,Custom Blend,900,Rainfed,None,0,3600,5000,Local Grocery Stores,10,Drought,True,False,True,Yes,No,Yes,550,Community-oriented farming
+Olivia Anderson,Golden Fields,2109876543,Chickpeas,5,5.8,1300,5800,Ammonium Sulfate,1100,Tube Well,Sprinkler System,2800,3800,4800,Export Market,13,Pest Infestation,True,False,False,Yes,No,Yes,600,Experienced improvement in yields
+Charles Wilson,Fertile Valley,1098765432,Potatoes,7,8.2,1800,7000,Granular Fertilizer,1300,Borewell,Drip Irrigation,2700,4200,5500,Local Grocery Stores,16,Early Frost,True,False,False,Yes,Yes,Yes,750,Implementing sustainable practices
+Sophia Smith,Maple Grove,9876654321,Barley,4,3.2,850,4500,Urea,950,Canal Water,Flood Irrigation,2000,3100,4000,Local Brewery,10,Weed Infestation,True,False,True,Yes,No,Yes,500,Community-supported agriculture
+
