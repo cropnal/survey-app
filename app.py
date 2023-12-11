@@ -172,6 +172,7 @@ def main():
                 df = data 
                 # Graph: Farmers vs Cost of Cultivation
                 st.subheader("Farmers vs Cost of Cultivation")
+                st.write("Visualizing farmers' cost of cultivation trends, net profits, and monthly incomes through area and bar charts aids in understanding financial aspects, enabling informed decision-making for sustainable agriculture.")
                 st.area_chart(df_1)
 
                 # Graph: Farmer vs Net Profit
