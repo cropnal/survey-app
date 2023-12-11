@@ -130,53 +130,24 @@ def main():
 
                 # Create labeled areas with big green or red background
                 st.markdown(
-                    f"""
-                    <style>
-                        @media only screen and (max-width: 600px) {{
-                            div {{
-                                flex-direction: column;
-                            }}
-                        }}
-                        div {{
-                            background-color: #0000;
-                            padding: 10px;
-                            border-radius: 10px;
-                            display: flex;
-                            justify-content: space-between;
-                        }}
-                        div > div {{
-                            flex: 1;
-                            margin: 10px;
-                        }}
-                        div > div h1 {{
-                            color: white;
-                            font-size: 40px;
-                            text-align: center;
-                        }}
-                        div > div p {{
-                            color: white;
-                            text-align: center;
-                        }}
-                    </style>
-                    <div>
-                        <div style='background-color: {background_color_happy}; padding: 30px; border-radius: 10px;'>
-                            <h1>{happy_percentage:.2f}%</h1>
-                            <p>Happy Farmers</p>
-                        </div>
-                        <div style='background-color: {background_color_total}; padding: 30px; border-radius: 10px;'>
-                            <h1>{total_entries}</h1>
-                            <p>Total Farmers</p>
-                        </div>
-                        <div style='background-color: {background_color_sad}; padding: 30px; border-radius: 10px;'>
-                            <h1>{unhappy_percentage:.2f}%</h1>
-                            <p>Unhappy Farmers</p>
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-
+                            f"""
+                            <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
+                                <div style='background-color: {background_color_happy}; padding: 30px; border-radius: 10px;'>
+                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {happy_percentage:.2f}%</h1>
+                                    <p style='color: white; text-align: center;'>Happy Farmers</p>
+                                </div>
+                                <div style='background-color: {background_color_total}; padding: 30px; border-radius: 10px;'>
+                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {total_entries}</h1>
+                                    <p style='color: white; text-align: center;'>Total Farmers</p>
+                                </div>
+                                <div style='background-color: {background_color_sad}; padding: 30px; border-radius: 10px;'>
+                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {unhappy_percentage:.2f}%</h1>
+                                    <p style='color: white; text-align: center;'>Unhappy Farmers</p>
+                                </div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
 
         elif survey_type=="vegetable_survey":   
             csv_filename = f"{survey_type.lower()}_data.csv"
