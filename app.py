@@ -21,7 +21,7 @@ def main():
         crop_name = st.text_input("Crop Name", "Rice")
         crop_duration = st.number_input("Crop Duration (months)", min_value=1, step=1, value=6)
         crop_area = st.number_input("Crop Area in Bigha", min_value=0.1, step=0.1, value=5.0)
-        seeds = st.text_input("Seeds", "Hybrid Seeds")
+        seeds = st.number_input("Seeds", value=1000)
         fertilizer_cost = st.number_input("Fertilizer Cost", min_value=0, value=5000)
         fertilizer_type = st.text_input("Which Fertilizer", "NPK")
         pesticide_cost = st.number_input("Pesticide Cost", min_value=0, value=1000)
@@ -72,7 +72,7 @@ def main():
                 "Labour Cost": labour_cost,
                 "Crop Yield in KG": crop_yield,
                 "Selling Market": selling_market,
-                "Market Price": market_price,
+                "Market Price per KG ": market_price,
                 "Weather Issue": weather_issue,
                 "Government Compensation": gov_compensation,
                 "Crop Insurance": crop_insurance,
@@ -130,24 +130,60 @@ def main():
 
                 # Create labeled areas with big green or red background
                 st.markdown(
-                            f"""
-                            <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
-                                <div style='background-color: {background_color_happy}; padding: 30px; border-radius: 10px;'>
-                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {happy_percentage:.2f}%</h1>
-                                    <p style='color: white; text-align: center;'>Happy Farmers</p>
-                                </div>
-                                <div style='background-color: {background_color_total}; padding: 30px; border-radius: 10px;'>
-                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {total_entries}</h1>
-                                    <p style='color: white; text-align: center;'>Total Farmers</p>
-                                </div>
-                                <div style='background-color: {background_color_sad}; padding: 30px; border-radius: 10px;'>
-                                    <h1 style='color: white; font-size: 40px; text-align: center;'> {unhappy_percentage:.2f}%</h1>
-                                    <p style='color: white; text-align: center;'>Unhappy Farmers</p>
-                                </div>
-                            </div>
-                            """,
-                            unsafe_allow_html=True
-                        )
+                    f"""
+                    <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
+                        <div style='background-color: {background_color_happy}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Happy Farmers</p>
+                        </div>
+                        <div style='background-color: {background_color_total}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {total_entries}</h4>
+                            <p style='color: white; text-align: center;'>Total Farmers</p>
+                        </div>
+                        <div style='background-color: {background_color_sad}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Unhappy Farmers</p>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+                data.fillna(0, inplace=True)
+                data["Seeds"] = pd.to_numeric(data["Seeds"], errors='coerce')
+                data["Fertilizer Cost"] = pd.to_numeric(data["Fertilizer Cost"], errors='coerce')
+                data["Pesticide Cost"] = pd.to_numeric(data["Pesticide Cost"], errors='coerce')
+                data["Cost of Water System"] = pd.to_numeric(data["Cost of Water System"], errors='coerce')
+                data["Labour Cost"] = pd.to_numeric(data["Labour Cost"], errors='coerce')
+                data["Miscellaneous Cost"] = pd.to_numeric(data["Miscellaneous Cost"], errors='coerce')
+
+                data['cost of cultivation'] = data["Seeds"]+ data["Fertilizer Cost"]+ data["Pesticide Cost"]+ data["Cost of Water System"]+ data["Labour Cost"]+ data["Miscellaneous Cost"]
+
+
+                data['revenue'] = data["Crop Yield in KG"] * data["Market Price"]
+                # Calculate net profit
+                data['Net Profit'] = data['revenue'] - data['cost of cultivation']
+
+                # Calculate monthly income
+                data['monthly income'] = data['Net Profit'] / data["Crop Duration (months)"]
+
+                
+                df_1 = pd.DataFrame(data,columns=['revenue','cost of cultivation'])
+                print(df_1)
+                df = data 
+                # Graph: Farmers vs Cost of Cultivation
+                st.subheader("Farmers vs Cost of Cultivation")
+                st.area_chart(df_1)
+
+                # Graph: Farmer vs Net Profit
+                st.subheader("Farmer vs Net Profit")
+                st.bar_chart(df.set_index("Farmer Name")["Net Profit"],color="#007000")
+
+                # Graph: Farmer vs Monthly Income
+                st.subheader("Farmer vs Monthly Income")
+                st.bar_chart(df.set_index("Farmer Name")["monthly income"],color="#D2222D")
+                                
+
+
 
         elif survey_type=="vegetable_survey":   
             csv_filename = f"{survey_type.lower()}_data.csv"
@@ -181,16 +217,16 @@ def main():
             st.markdown(
                 f"""
                 <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
-                    <div style='background-color: {background_color_happy_vegetable}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {happy_percentage_vegetable:.2f}%</h1>
+                    <div style='background-color: {background_color_happy_vegetable}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage_vegetable:.2f}%</h4>
                         <p style='color: white; text-align: center;'>Happy Vegetable Sellers</p>
                     </div>
-                    <div style='background-color: {background_color_total_vegetable}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {total_vegetable_sellers}</h1>
+                    <div style='background-color: {background_color_total_vegetable}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {total_vegetable_sellers}</h4>
                         <p style='color: white; text-align: center;'>Total Vegetable Sellers</p>
                     </div>
-                    <div style='background-color: {background_color_sad_vegetable}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {unhappy_percentage_vegetable:.2f}%</h1>
+                    <div style='background-color: {background_color_sad_vegetable}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage_vegetable:.2f}%</h4>
                         <p style='color: white; text-align: center;'>Unhappy Vegetable Sellers</p>
                     </div>
                 </div>
@@ -209,7 +245,24 @@ def main():
             st.markdown("Bar Chart - Kg Sold per Day vs Number of People")
             st.bar_chart(type_counts.set_index('Kg Sold per Day'),color='#BF40BF')
 
-        
+            data['Net Profit'] = ((data['Selling Price']-data['Vegetable Purchase Value per KG'])*data['Kg Purchase'])-data['Spoilage Losses']-data['Transport Cost']
+            data['Net Profit per kg'] = (
+                    (data['Selling Price'] - data['Vegetable Purchase Value per KG']) * data['Kg Purchase'] -
+                    data['Spoilage Losses'] - data['Transport Cost']
+            ) / data['Kg Purchase']
+
+            st.subheader('Age-wise Total KG Selling')
+            st.write("This line chart illustrates how the total kilograms sold per day varies with the seller's age. It helps in understanding the selling trend based on age, indicating the productivity or efficiency of sellers at different age groups.")
+            line_chart_data_kg_sold = data[['Age', 'Kg Sold per Day']]
+            line_chart_data_kg_sold.set_index('Age', inplace=True)
+            st.area_chart(line_chart_data_kg_sold)
+
+            # Line chart: Age vs Net Profit and Age vs Net Profit per KG
+            st.subheader('Age-wise Net Profit and Net Profit per KG')
+            st.write("This line chart represents two trends. The first line shows the net profit for each age group, helping to identify how the overall profit changes with the seller's age. The second line represents the net profit per kilogram, indicating the bargaining skills or pricing strategies of different age groups.")
+            line_chart_data_net_profit = data[['Age', 'Net Profit per kg']]
+            line_chart_data_net_profit.set_index('Age', inplace=True)
+            st.area_chart(line_chart_data_net_profit)
 
 
         elif survey_type == "trader_survey":
@@ -244,16 +297,16 @@ def main():
             st.markdown(
                 f"""
                 <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
-                    <div style='background-color: {background_color_happy_trader}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {happy_percentage_trader:.2f}%</h1>
+                    <div style='background-color: {background_color_happy_trader}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage_trader:.2f}%</h4>
                         <p style='color: white; text-align: center;'>Happy Traders</p>
                     </div>
-                    <div style='background-color: {background_color_total_trader}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {total_traders}</h1>
+                    <div style='background-color: {background_color_total_trader}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {total_traders}</h4>
                         <p style='color: white; text-align: center;'>Total Traders</p>
                     </div>
-                    <div style='background-color: {background_color_sad_trader}; padding: 30px; border-radius: 10px;'>
-                        <h1 style='color: white; font-size: 40px; text-align: center;'> {unhappy_percentage_trader:.2f}%</h1>
+                    <div style='background-color: {background_color_sad_trader}; padding: 10px; border-radius: 10px;'>
+                        <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage_trader:.2f}%</h4>
                         <p style='color: white; text-align: center;'>Unhappy Traders</p>
                     </div>
                 </div>
@@ -277,6 +330,7 @@ def main():
         # Vegetable Information
         seller_name = st.text_input("Seller Name", "Vegetable Seller")
         vegetable_name = st.text_input("Vegetable Name", "Tomato")
+        age = st.number_input("Enter Age",value=30)
         amount_purchase = st.number_input("Kg purchase", min_value=0.0, value=10.0)
         purchase_value_per_kg = st.number_input("Vegetable Purchase Value per KG", min_value=0.0, value=5.0)
         transport_cost = st.number_input("Transport Cost", min_value=0.0, value=50.0)
@@ -303,6 +357,7 @@ def main():
             # Store data in CSV
             data = {
                 "Seller Name": [seller_name],
+                "Age": [age],
                 "Vegetable Name": [vegetable_name],
                 "Vegetable Purchase Value per KG": [purchase_value_per_kg],
                 "Kg Purchase": [amount_purchase],
