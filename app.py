@@ -166,8 +166,9 @@ def main():
                 # Calculate monthly income
                 data['monthly income'] = data['Net Profit'] / data["Crop Duration (months)"]
 
-                
+                data['percentage_profit'] = 100*(data['Net Profit']/data['revenue'])
                 df_1 = pd.DataFrame(data,columns=['revenue','cost of cultivation'])
+                
                 print(df_1)
                 df = data 
                 # Graph: Farmers vs Cost of Cultivation
@@ -175,9 +176,9 @@ def main():
                 st.write("Visualizing farmers' cost of cultivation trends, net profits, and monthly incomes through area and bar charts aids in understanding financial aspects, enabling informed decision-making for sustainable agriculture.")
                 st.area_chart(df_1)
 
-                # Graph: Farmer vs Net Profit
-                st.subheader("Farmer vs Net Profit")
-                st.bar_chart(df.set_index("Farmer Name")["Net Profit"],color="#007000")
+                # Graph: Farmer vs percentage Net Profit
+                st.subheader("Farmer vs Percentage Profit")
+                st.bar_chart(df.set_index("Farmer Name")["percentage_profit"],color="#009000")
 
                 # Graph: Farmer vs Monthly Income
                 st.subheader("Farmer vs Monthly Income")
