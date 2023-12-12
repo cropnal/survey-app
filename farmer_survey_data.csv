@@ -1,12 +1,15 @@
 Farmer Name,Village,Mobile,Crop Name,Crop Duration (months),Crop Area in Bigha,Seeds,Fertilizer Cost,Which Fertilizer,Pesticide Cost,Water Supply Options,Water Supply System,Cost of Water System,Labour Cost,Crop Yield in KG,Selling Market,Market Price,Weather Issue,Government Compensation,Crop Insurance,Storage Challenges,Happy with Income,Farming Job Satisfaction,Inspire Other Farmers,Miscellaneous Cost,Extra Description
-Jane Smith,Greenfield Village,9876543210,Wheat,5,4.5,1200,5500,DAP,1200,Canal Water,Flood Irrigation,2500,3500,4800,Regional Co-op,9,Frost,False,True,False,Yes,Yes,Yes,600,No significant issues
-Robert Johnson,Sunnydale,8765432109,Maize,4,6.0,800,4000,Urea,800,Borewell,Drip Irrigation,1800,3000,4000,Local Market,8,Heavy Rain,True,False,False,Yes,No,Yes,450,Overall satisfied with results
-Maria Garcia,Harvest Hills,7654321098,Soybeans,5,7.5,1500,6000,Organic,1500,Rainfed,None,0,3800,5500,Farmer's Market,12,Pest Infestation,False,True,False,Yes,No,Yes,700,Emphasizes sustainable farming
-Michael Brown,Sunrise Acres,6543210987,Cotton,7,10.0,2000,7500,Nitrogen,1500,Tube Well,Sprinkler System,3000,4500,7000,Textile Industry,15,Crop Disease,False,True,True,Yes,No,Yes,800,Challenges in marketing
-William Davis,Meadowview,5432109876,Barley,4,3.5,900,4800,Phosphorus,1000,Canal Water,Flood Irrigation,2200,3200,4200,Local Brewery,11,Weed Infestation,True,False,False,Yes,Yes,Yes,500,Optimistic despite challenges
-Eva Wilson,Sunflower Springs,4321098765,Sugarcane,8,12.0,2500,8500,Potash,1200,Borewell,Drip Irrigation,2500,4000,6000,Sugar Mill,18,Flood,True,True,False,Yes,Yes,Yes,900,Invested in new equipment
-Daniel Miller,Growing Grove,3210987654,Peanuts,6,6.5,1100,5200,Custom Blend,900,Rainfed,None,0,3600,5000,Local Grocery Stores,10,Drought,True,False,True,Yes,No,Yes,550,Community-oriented farming
-Olivia Anderson,Golden Fields,2109876543,Chickpeas,5,5.8,1300,5800,Ammonium Sulfate,1100,Tube Well,Sprinkler System,2800,3800,4800,Export Market,13,Pest Infestation,True,False,False,Yes,No,Yes,600,Experienced improvement in yields
-Charles Wilson,Fertile Valley,1098765432,Potatoes,7,8.2,1800,7000,Granular Fertilizer,1300,Borewell,Drip Irrigation,2700,4200,5500,Local Grocery Stores,16,Early Frost,True,False,False,Yes,Yes,Yes,750,Implementing sustainable practices
-Sophia Smith,Maple Grove,9876654321,Barley,4,3.2,850,4500,Urea,950,Canal Water,Flood Irrigation,2000,3100,4000,Local Brewery,10,Weed Infestation,True,False,True,Yes,No,Yes,500,Community-supported agriculture
-
+VijayKumar Rameshbhai Patel,Runi Patan,9723106017,Arenda ,5,3.25,1500,3400,Urea ,2980,Tube Well,Randomly,19986,15000,4100,Patan Ganj Bajar,38,Rainfall,False,False,False,Yes,Yes,Yes,0,"Fertiliser transmission from Water
+Miscellaneous cost : tractor cost (5700) + harvesting (3500) + transport (1000) + labour(5000)"
+VijayKumar Rameshbhai Patel,Runi,9723106017,Onion (small),2,0.5,4500,300,Urea,200,Tube Well,Randomly,900,4000,1700,Vegetable Market,15,Rainfall,False,False,False,No,Yes,Yes,0,Miscellaneous cost :  transport (1500) + labour(1700)
+VijayKumar Rameshbhai Patel,Runi,9723106017,Carrot,3,2.5,4500,700,Urea,250,Tube Well,Randomly,8500,22000,18550,Vegetable Market,12,Rainfall,False,False,False,Yes,Yes,Yes,0,Miscellaneous cost : labour(15000) + plow(7000)
+Rameshbhai Patel,Runi,9723106017,wheet ,3,1.5,1000,600,Urea,200,Tube Well,Randomly,4500,32000,1400,Patan Ganj Bajar,25,no,False,False,False,No,Yes,Yes,0,"Miscellaneous cost : labour(1800) + harvesting&thresor(1400) 
+Grass compost : income of 4000 to 5000"
+Rameshbhai Patel,Runi,9723106017,bajra ,3,2.5,800,1100,Urea,200,Tube Well,Randomly,5700,4300,2500,Patan Ganj Bajar,22,no,False,False,False,No,Yes,Yes,0,"Miscellaneous cost : labour(2500) + harvesting&thresor(1800) 
+Pudo ( for animal) : income of 18500rs. of 2.5 bigha"
+Rameshbhai Patel,Runi,9723106017,Variyali ,6,1.5,400,200,Urea,600,Tube Well,Randomly,2300,2500,1400,Patan Ganj Bajar,55,no,False,False,False,No,Yes,Yes,0,"Miscellaneous cost : labour(1000) + harvesting&thresor(1500)
+depends on NCDEX"
+Rameshbhai Patel,Runi,9723106017,Jira,1,1.0,1800,300,Urea,1200,Tube Well,Randomly,1500,1500,240,Patan Ganj Bajar,300,"Fog, Humidity, Average Temperature",False,False,False,Yes,Yes,Yes,0,"Miscellaneous cost : + harvesting&thresor(1500)
+depends on NCDEX"
+Prakashbhai Patel,Runi,9924964395,raido,4,2.5,200,2000,Urea + DAP,300,Tube Well,Randomly,4500,4000,1200,Patan Ganj Bajar,55,Storms may be ,False,False,False,No,Yes,Yes,0,"Miscellaneous cost : labour(2000)+ harvesting&thresor(1500) +transport(400)
+Highly preferred Crop by farmer due to low labour and maintenance and crop assurance "
