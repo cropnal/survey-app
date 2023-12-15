@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 import os
+
+# Load secrets
+secrets = st.secrets["authentication"]
+valid_username = secrets["username"]
+valid_password = secrets["password"]
+
 # Tab 2: Analytics
 def save_to_csv(data):
     df = pd.DataFrame(data)
@@ -8,6 +14,19 @@ def save_to_csv(data):
     st.session_state.csv_file_exists = True
 
 def main():
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username == valid_username and password == valid_password:
+            st.success("Login successful!")
+            st.session_state.authenticated = True
+        else:
+            st.error("Invalid username or password")
+
+    if not getattr(st.session_state, "authenticated", False):
+        st.warning("Please log in to access the app.")
+        st.stop()
     st.title("Cropnal Survey")
     tabs = ["Farmer Survey","Vegetable Survey", "Admin Analytics"]
     current_tab = st.selectbox("Select Tab", tabs)
