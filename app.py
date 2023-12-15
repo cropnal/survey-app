@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import os
 # Tab 2: Analytics
+def save_to_csv(data):
+    df = pd.DataFrame(data)
+    df.to_csv("survey_responses.csv", mode="a", header=not st.session_state.csv_file_exists, index=False)
+    st.session_state.csv_file_exists = True
+
 def main():
     st.title("Cropnal Survey")
     tabs = ["Farmer Survey","Vegetable Survey", "Admin Analytics"]
@@ -188,83 +193,105 @@ def main():
 
 
         elif survey_type=="vegetable_survey":   
-            csv_filename = f"{survey_type.lower()}_data.csv"
 
-            data = pd.read_csv(csv_filename) 
-            # Display data table
-            st.subheader("Data Table")
-            st.dataframe(data)
+            csv_filename = "survey_responses.csv"
+            st.header("Analytics")
 
-            # Display relevant graphs
-            st.subheader("Data Analytics")
+            # Load survey responses from CSV
+            data = pd.read_csv("survey_responses.csv")
+            st.table(data)
 
-            # Total number of entries
+            
             total_entries = len(data)
-            st.subheader("Vegetable Sellers Analysis")
+            if 'Ready to Purchase at Low Prices' in data.columns:
+                st.subheader("Ready to Purchase at Low Prices")
 
-            # Calculate total vegetable sellers
-            total_vegetable_sellers = total_entries
+                # Calculate percentage of happy and unhappy farmers
+                happy_percentage = (data['Ready to Purchase at Low Prices'] == 'Yes').sum() / total_entries * 100
+                unhappy_percentage = (data['Ready to Purchase at Low Prices'] == 'No').sum() / total_entries * 100
 
-            # Calculate percentage of happy and unhappy vegetable sellers
-            happy_percentage_vegetable = (data['Happiness Index'] == 'Yes').sum() / total_vegetable_sellers * 100
-            unhappy_percentage_vegetable = (data['Happiness Index'] == 'No').sum() / total_vegetable_sellers * 100
+                # Determine background color based on happiness percentage
+                background_color_happy = "#4CAF50"
+                background_color_sad = "#FF5733"
+                background_color_total = "#808080"  # Grey for total
 
-
-            # Determine background color based on happiness percentage
-            background_color_happy_vegetable = "#4CAF50"
-            background_color_sad_vegetable = "#FF5733"
-            background_color_total_vegetable = "#808080"  # Grey for total
-
-            # Create labeled areas with big green or red background for vegetable sellers
-            st.markdown(
-                f"""
-                <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
-                    <div style='background-color: {background_color_happy_vegetable}; padding: 10px; border-radius: 10px;'>
-                        <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage_vegetable:.2f}%</h4>
-                        <p style='color: white; text-align: center;'>Happy Vegetable Sellers</p>
+                # Create labeled areas with big green or red background
+                st.markdown(
+                    f"""
+                    <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
+                        <div style='background-color: {background_color_happy}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Low Price Purchaser</p>
+                        </div>
+                        <div style='background-color: {background_color_total}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {total_entries}</h4>
+                            <p style='color: white; text-align: center;'>Total Survey Entries</p>
+                        </div>
+                        <div style='background-color: {background_color_sad}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Dont Care</p>
+                        </div>
                     </div>
-                    <div style='background-color: {background_color_total_vegetable}; padding: 10px; border-radius: 10px;'>
-                        <h4 style='color: white; font-size: 20px; text-align: center;'> {total_vegetable_sellers}</h4>
-                        <p style='color: white; text-align: center;'>Total Vegetable Sellers</p>
+                    """,
+                    unsafe_allow_html=True
+                )
+            if 'Fair Prices to Purchase' in data.columns:
+                st.subheader("Fair Prices to Purchase ?")
+
+                # Calculate percentage of happy and unhappy farmers
+                happy_percentage = (data['Fair Prices to Purchase'] == 'Yes').sum() / total_entries * 100
+                unhappy_percentage = (data['Fair Prices to Purchase'] == 'No').sum() / total_entries * 100
+
+                # Determine background color based on happiness percentage
+                background_color_happy = "#4CAF50"
+                background_color_sad = "#FF5733"
+                background_color_total = "#808080"  # Grey for total
+
+                # Create labeled areas with big green or red background
+                st.markdown(
+                    f"""
+                    <div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
+                        <div style='background-color: {background_color_happy}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {happy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Fair Prices</p>
                     </div>
-                    <div style='background-color: {background_color_sad_vegetable}; padding: 10px; border-radius: 10px;'>
-                        <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage_vegetable:.2f}%</h4>
-                        <p style='color: white; text-align: center;'>Unhappy Vegetable Sellers</p>
+                    """,
+                    unsafe_allow_html=True
+                )
+                st.markdown(
+                    f"""
+<div style='background-color: #0000; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between;'>
+                        <div style='background-color: {background_color_sad}; padding: 10px; border-radius: 10px;'>
+                            <h4 style='color: white; font-size: 20px; text-align: center;'> {unhappy_percentage:.2f}%</h4>
+                            <p style='color: white; text-align: center;'>Fair Prices</p>
                     </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+                    """,unsafe_allow_html=True
+                )
 
-            # Count occurrences of each type
-            type_counts = data['Kg Sold per Day'].value_counts().reset_index()
-            type_counts.columns = ['Kg Sold per Day', 'Number of People']
+                selected_restaurant = st.text_input("Enter Restaurant Name:")
+                if selected_restaurant:
+                    fetched_rows_data = data[data["Shop Name"].str.lower() == selected_restaurant.lower()]
+                    st.write(fetched_rows_data)
+                    if not fetched_rows_data.empty:
+                        # Display total kilograms supplied with expiry time
+                        st.subheader(f"Total Kilograms Supplied by {selected_restaurant}:")
+                        total_kg = fetched_rows_data["Weight (kg)"].sum()
+                        st.header(f"Total Kilograms: {total_kg}")
+                        rows_kg = fetched_rows_data[["Name of Vegetable/Fruit/Grain/Nuts","Weight (kg)"]]
+                        # Bar plot for "Name of Vegetable/Fruit/Grain/Nuts" vs "Weight (kg)"
+                        st.subheader(f"Bar Plot for {selected_restaurant}:")
+                        st.write(rows_kg)
+                        st.area_chart(rows_kg.set_index("Name of Vegetable/Fruit/Grain/Nuts"))
 
-            # Streamlit app
-            st.subheader("Vegetable seller's VS CAPACTIY")
 
-            # Bar chart
-            st.markdown("Bar Chart - Kg Sold per Day vs Number of People")
-            st.bar_chart(type_counts.set_index('Kg Sold per Day'),color='#BF40BF')
 
-            data['Net Profit'] = ((data['Selling Price']-data['Vegetable Purchase Value per KG'])*data['Kg Purchase'])-data['Spoilage Losses']-data['Transport Cost']
-            data['Net Profit per kg'] = (
-                    (data['Selling Price'] - data['Vegetable Purchase Value per KG']) * data['Kg Purchase'] -
-                    data['Spoilage Losses'] - data['Transport Cost']
-            ) / data['Kg Purchase']
+                    else:
+                        st.warning(f"No data found for the restaurant: {selected_restaurant}")
 
-            st.subheader('Age-wise Total KG Selling')
-            st.write("This line chart illustrates how the total kilograms sold per day varies with the seller's age. It helps in understanding the selling trend based on age, indicating the productivity or efficiency of sellers at different age groups.")
-            line_chart_data_kg_sold = data[['Age', 'Kg Sold per Day']]
-            line_chart_data_kg_sold.set_index('Age', inplace=True)
-            st.area_chart(line_chart_data_kg_sold)
 
-            # Line chart: Age vs Net Profit and Age vs Net Profit per KG
-            st.subheader('Age-wise Net Profit and Net Profit per KG')
-            st.write("This line chart represents two trends. The first line shows the net profit for each age group, helping to identify how the overall profit changes with the seller's age. The second line represents the net profit per kilogram, indicating the bargaining skills or pricing strategies of different age groups.")
-            line_chart_data_net_profit = data[['Age', 'Net Profit per kg']]
-            line_chart_data_net_profit.set_index('Age', inplace=True)
-            st.area_chart(line_chart_data_net_profit)
+            
+
+            
 
 
         elif survey_type == "trader_survey":
@@ -323,62 +350,65 @@ def main():
 
 
     elif current_tab == "Vegetable Survey":
-        st.title("Vegetable Survey")
-        
-        # Check if the CSV file exists
-        csv_filename = "vegetable_survey_data.csv"
-        file_exists = os.path.isfile(csv_filename)
+        file_exists = os.path.isfile("survey_responses.csv")
+        if "csv_file_exists" not in st.session_state:
+                st.session_state.csv_file_exists = False
 
-        # Vegetable Information
-        seller_name = st.text_input("Seller Name", "Vegetable Seller")
-        vegetable_name = st.text_input("Vegetable Name", "Tomato")
-        age = st.number_input("Enter Age",value=30)
-        amount_purchase = st.number_input("Kg purchase", min_value=0.0, value=10.0)
-        purchase_value_per_kg = st.number_input("Vegetable Purchase Value per KG", min_value=0.0, value=5.0)
-        transport_cost = st.number_input("Transport Cost", min_value=0.0, value=50.0)
-        spoilage_losses = st.number_input("Spoilage Losses", min_value=0.0, value=10.0)
-        selling_price = st.number_input("Selling Price", min_value=0.0, value=15.0)
-        
-        # Purchase Information
-        purchase_location = st.text_input("Purchase Location", "Local Market")
+        st.header("Participant Information")
+        name = st.text_input("Name", value="John Doe")
+        phone_number = st.number_input("Phone Number", value=1234567890, format="%d")
+        shop_name = st.text_input("Shop Name", value="Doe Mart")
+        location_area = st.text_input("Location (Area)", value="Sample Area")
+        location_city = st.text_input("Location (City)", value="Sample City")
+        shop_type_options = ["Large Restaurants", "Food Chains", "Food Lari", "FastFood Shop",
+                             "Food Processor Plant", "Vegetable Lari", "Vegetable Store"]
+        shop_type = st.selectbox("Type of Shop/Lari", shop_type_options, index=2)
+        main_product = st.text_input("Main Product", value="Vegetables")
 
-        # Happiness Index
-        happiness_index = st.radio("Happy with Income?", ["Yes", "No"], index=0)
+        # Supply Information
+        st.header("Supply Information")
+        veg_name = st.text_input("Name of Vegetable/Fruit/Grain/Nuts", value="Tomatoes")
+        category_options = ["Vegetable", "Fruit", "Grain", "Nuts"]
+        category = st.selectbox("Category", category_options, index=0)
+        weight = st.number_input("Weight (kg)", value=10, format="%d")
+        price_per_kg = st.number_input("Price per KG", value=50.0)
+        transport_cost = st.number_input("Transport Cost", value=10.0)
+        source_of_supply = st.text_input("Source of Supply", value="Local Farms")
+        expiry_time = st.number_input("Expiry Time (days)", value=7, format="%d")
+        fair_prices = st.radio("Is this fair prices to purchase for them?", ["Yes", "No"], index=0)
+        ready_to_purchase = st.radio("Are they ready to purchase at low prices?", ["Yes", "No"], index=0)
+        if ready_to_purchase == "Yes":
+            expected_low_prices = st.number_input("Expected Low Prices", value=40, format="%d")
 
-        # Additional Information
-        phone_number = st.text_input("Phone Number", "")
-        lower_price_preference = st.checkbox("I want vegetables at a lower price")
-
-        # New Questions
-        income_insecurity = st.radio("Are you insecure about your income source?", ["Yes", "No"], index=1)
-        
-        # Additional Question
-        kg_sold_per_day = st.number_input("How many kilograms of vegetables/fruits do you sell in a day?", min_value=0)
-
+        # Display submitted information
         if st.button("Submit"):
-            # Store data in CSV
+            st.subheader("Submitted Information:")
+            # Save to CSV
             data = {
-                "Seller Name": [seller_name],
-                "Age": [age],
-                "Vegetable Name": [vegetable_name],
-                "Vegetable Purchase Value per KG": [purchase_value_per_kg],
-                "Kg Purchase": [amount_purchase],
-                "Transport Cost": [transport_cost],
-                "Spoilage Losses": [spoilage_losses],
-                "Selling Price": [selling_price],
-                "Purchase Location": [purchase_location],
-                "Happiness Index": [happiness_index],
+                "Name": [name],
                 "Phone Number": [phone_number],
-                "Lower Price Preference": [lower_price_preference],
-                "Income Insecurity": [income_insecurity],
-                "Kg Sold per Day": [kg_sold_per_day]
+                "Shop Name": [shop_name],
+                "Location (Area)": [location_area],
+                "Location (City)": [location_city],
+                "Type of Shop/Lari": [shop_type],
+                "Main Product": [main_product],
+                "Name of Vegetable/Fruit/Grain/Nuts": [veg_name],
+                "Category": [category],
+                "Weight (kg)": [weight],
+                "Price per KG": [price_per_kg],
+                "Transport Cost": [transport_cost],
+                "Source of Supply": [source_of_supply],
+                "Expiry Time (days)": [expiry_time],
+                "Fair Prices to Purchase": [fair_prices],
+                "Ready to Purchase at Low Prices": [ready_to_purchase],
+                "Expected Low Prices": [expected_low_prices] if ready_to_purchase == "Yes" else [None],
             }
 
             # Check if the file exists to determine whether to write the header
             mode = "w" if not file_exists else "a"
 
             df = pd.DataFrame(data)
-            df.to_csv(csv_filename, mode=mode, header=not file_exists, index=False)
+            df.to_csv("survey_responses.csv", mode=mode, header=not file_exists, index=False)
 
             st.success("Survey submitted successfully!")
             st.toast("Data successfully added!")
